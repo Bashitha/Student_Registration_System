@@ -19,7 +19,7 @@ namespace Test.Controllers
         {
             _context = context;
         }
-        [Authorize]
+        
         // GET: Students
         public async Task<IActionResult> Index()
         {
@@ -44,6 +44,7 @@ namespace Test.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Admin, Student")]
         // GET: Students/Create
         public IActionResult Create()
         {
@@ -53,6 +54,8 @@ namespace Test.Controllers
         // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "Admin, Student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
@@ -66,6 +69,7 @@ namespace Test.Controllers
             return View(student);
         }
 
+        [Authorize(Roles = "Admin, Student")]
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,6 +89,7 @@ namespace Test.Controllers
         // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
@@ -118,6 +123,7 @@ namespace Test.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize(Roles = "Admin, Student")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +142,7 @@ namespace Test.Controllers
         }
 
         // POST: Students/Delete/5
+        [Authorize(Roles = "Admin, Student")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
